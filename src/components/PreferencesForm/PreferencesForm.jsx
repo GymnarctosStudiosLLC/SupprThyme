@@ -10,11 +10,19 @@ import {
   FormControlLabel,
   Switch,
   TextField,
+  Chip,
+  Box,
   OutlinedInput,
   Checkbox,
   ListItemText,
+  Typography,
+  Grid,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
-import axios from "axios";
 import AllergenSelect from "./AllergenSelect";
 import {
   resetPreferencesForm,
@@ -27,271 +35,251 @@ import {
   setOpenNow,
   setAcceptsLargeParties,
   updatePreferences,
-} from '../../redux/actions/PreferencesForm.actions.js';
+  fetchPriceRanges,
+  fetchMeatPreferences,
+  fetchReligiousRestrictions,
+  fetchAllergenOptions,
+  fetchCuisineOptions,
+} from "../../redux/actions/PreferencesForm.actions.js";
 
 const UserPreferencesForm = ({ onSubmit, onCancel }) => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const preferences = useSelector((store) => store.preferences);
 
-  // State variables
-  const [selectedAllergens, setSelectedAllergens] = useState(preferences.allergens);
-  const [max_price_range, setMaxPriceRangeState] = useState(preferences.max_price_range);
-  const [meat_preference, setMeatPreferenceState] = useState(preferences.meat_preference);
-  const [religious_restrictions, setReligiousRestrictionsState] = useState(preferences.religious_restrictions);
-  const [cuisine_types, setCuisineTypesState] = useState(preferences.cuisine_types);
-  const [max_distance, setMaxDistanceState] = useState(preferences.max_distance);
-  const [open_now, setOpenNowState] = useState(preferences.open_now);
-  const [accepts_large_parties, setAcceptsLargePartiesState] = useState(preferences.accepts_large_parties);
-
-  const [allergenOptions, setAllergenOptions] = useState([]);
-  const [cuisineOptions, setCuisineOptions] = useState([]);
-  const [priceRangeOptions, setPriceRangeOptions] = useState([]);
-  const [meatPreferenceOptions, setMeatPreferenceOptions] = useState([]);
-  const [religiousRestrictionOptions, setReligiousRestrictionsOptions] = useState([]);
   const [error, setError] = useState(null);
+  const [openCancelDialog, setOpenCancelDialog] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchOptions = async () => {
+    const fetchData = async () => {
+      setIsLoading(true);
       try {
-        const [
-          priceRanges,
-          meatPreferences,
-          religiousOptions,
-          allergenOpts,
-          cuisineOpts,
-        ] = await Promise.all([
-          axios.get("/api/form_data/price-ranges"),
-          axios.get("/api/form_data/meat-preferences"),
-          axios.get("/api/form_data/religious-options"),
-          axios.get("/api/form_data/allergen-options"),
-          axios.get("/api/form_data/cuisine-options"),
+        await Promise.all([
+          dispatch(fetchPriceRanges()),
+          dispatch(fetchMeatPreferences()),
+          dispatch(fetchReligiousRestrictions()),
+          dispatch(fetchAllergenOptions()),
+          dispatch(fetchCuisineOptions()),
         ]);
-
-        setPriceRangeOptions(priceRanges.data);
-        setMeatPreferenceOptions(meatPreferences.data);
-        setReligiousRestrictionsOptions(religiousOptions.data);
-        setAllergenOptions(allergenOpts.data);
-        setCuisineOptions(cuisineOpts.data);
       } catch (error) {
-        console.error("Error fetching options:", error);
-        setError("Error fetching options. Please try again later.");
+        setError("Failed to fetch form data. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
     };
+    fetchData();
+  }, [dispatch]);
 
-    fetchOptions();
-  }, []);
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const preferencesData = {
-      user_id: user.id,
-      max_price_range,
-      meat_preference,
-      religious_restrictions,
-      allergens: selectedAllergens,
-      cuisine_types,
-      max_distance,
-      open_now,
-      accepts_large_parties,
-    };
+    setError(null);
+    
+    // Basic form validation
+    if (!preferences.max_price_range || !preferences.meat_preference) {
+      setError("Please fill in all required fields.");
+      return;
+    }
 
-    dispatch(updatePreferences(preferencesData));
-
-    if (onSubmit) {
-      onSubmit(preferencesData);
+    try {
+      await dispatch(updatePreferences(preferences));
+      if (onSubmit) {
+        onSubmit(preferences);
+      }
+    } catch (error) {
+      setError("Failed to update preferences. Please try again later.");
     }
   };
 
   const handleCancel = () => {
-    // Reset the form to its initial state or perform any other action
-    setSelectedAllergens([]);
-    setMaxPriceRangeState("");
-    setMeatPreferenceState("");
-    setReligiousRestrictionsState("");
-    setCuisineTypesState([]);
-    setMaxDistanceState("");
-    setOpenNowState(true);
-    setAcceptsLargePartiesState(true);
+    setOpenCancelDialog(true);
+  };
 
-    // Dispatch the reset action
+  const confirmCancel = () => {
     dispatch(resetPreferencesForm());
-
+    setOpenCancelDialog(false);
     if (onCancel) {
       onCancel();
     }
   };
 
-  const handleMaxPriceRangeChange = (e) => {
-    const value = e.target.value;
-    setMaxPriceRangeState(value);
-    dispatch(setMaxPriceRange(value));
-  };
-
-  const handleMeatPreferenceChange = (e) => {
-    const value = e.target.value;
-    setMeatPreferenceState(value);
-    dispatch(setMeatPreference(value));
-  };
-
-  const handleReligiousRestrictionsChange = (e) => {
-    const value = e.target.value;
-    setReligiousRestrictionsState(value);
-    dispatch(setReligiousRestrictions(value));
-  };
-
-  const handleAllergensChange = (selected) => {
-    setSelectedAllergens(selected);
-    dispatch(setAllergens(selected));
-  };
-
-  const handleCuisineTypesChange = (e) => {
-    const value = e.target.value;
-    setCuisineTypesState(value);
-    dispatch(setCuisineTypes(value));
-  };
-
-  const handleMaxDistanceChange = (e) => {
-    const value = e.target.value;
-    setMaxDistanceState(value);
-    dispatch(setMaxDistance(value));
-  };
-
-  const handleOpenNowChange = (e) => {
-    const value = e.target.checked;
-    setOpenNowState(value);
-    dispatch(setOpenNow(value));
-  };
-
-  const handleAcceptsLargePartiesChange = (e) => {
-    const value = e.target.checked;
-    setAcceptsLargePartiesState(value);
-    dispatch(setAcceptsLargeParties(value));
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <form onSubmit={handleSubmit} data-testid="preferences-form">
-      {error && <div data-testid="error-message">{error}</div>}
-      <FormControl fullWidth margin="normal">
-        <InputLabel id="max-price-range-label">Max Price Range</InputLabel>
-        <Select
-          labelId="max-price-range-label"
-          value={max_price_range}
-          onChange={handleMaxPriceRangeChange}
-          data-testid="max-price-range-select"
-        >
-          {priceRangeOptions.map((option) => (
-            <MenuItem key={option.id} value={option.id} data-testid={`price-range-option-${option.id}`}>
-              {option.range}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
-      <FormControl fullWidth margin="normal">
-        <InputLabel id="meat-preference-label">Meat Preference</InputLabel>
-        <Select
-          labelId="meat-preference-label"
-          value={meat_preference}
-          onChange={handleMeatPreferenceChange}
-          data-testid="meat-preference-select"
-        >
-          {meatPreferenceOptions.map((option) => (
-            <MenuItem key={option.id} value={option.id} data-testid={`meat-preference-option-${option.id}`}>
-              {option.preference}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
-      <FormControl fullWidth margin="normal">
-        <InputLabel id="religious-restrictions-label">Religious Restrictions</InputLabel>
-        <Select
-          labelId="religious-restrictions-label"
-          value={religious_restrictions}
-          onChange={handleReligiousRestrictionsChange}
-          data-testid="religious-restrictions-select"
-        >
-          {religiousRestrictionOptions.map((option) => (
-            <MenuItem key={option.id} value={option.id} data-testid={`religious-restrictions-option-${option.id}`}>
-              {option.restriction}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
-      <AllergenSelect
-        selectedAllergens={selectedAllergens}
-        setSelectedAllergens={handleAllergensChange}
-        allergenOptions={allergenOptions}
-      />
-
-      <FormControl fullWidth margin="normal">
-        <InputLabel id="cuisine-types-label">Cuisine Types</InputLabel>
-        <Select
-          labelId="cuisine-types-label"
-          multiple
-          value={cuisine_types}
-          onChange={handleCuisineTypesChange}
-          input={<OutlinedInput label="Cuisine Types" />}
-          renderValue={(selected) =>
-            selected
-              .map((id) => {
-                const selectedCuisine = cuisineOptions.find((option) => option.id === id);
-                return selectedCuisine ? selectedCuisine.type : "";
-              })
-              .join(", ")
-          }
-          data-testid="cuisine-types-select"
-        >
-          {cuisineOptions.map((option) => (
-            <MenuItem key={option.id} value={option.id} data-testid={`cuisine-types-option-${option.id}`}>
-              <Checkbox checked={cuisine_types.includes(option.id)} />
-              <ListItemText primary={option.type} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
-      <TextField
-        fullWidth
-        margin="normal"
-        label="Max Distance"
-        type="number"
-        value={max_distance}
-        onChange={handleMaxDistanceChange}
-        data-testid="max-distance-input"
-      />
-
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={open_now}
-              onChange={handleOpenNowChange}
-              data-testid="open-now-checkbox"
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="max-price-range-label">Max Price Range *</InputLabel>
+            <Select
+              labelId="max-price-range-label"
+              value={preferences.max_price_range}
+              onChange={(e) => dispatch(setMaxPriceRange(e.target.value))}
+              data-testid="max-price-range-select"
+              required
+            >
+              {preferences.priceRangeOptions.map((option) => (
+                <MenuItem key={option.id} value={option.id}>
+                  {option.range}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="meat-preference-label">Meat Preference *</InputLabel>
+            <Select
+              labelId="meat-preference-label"
+              value={preferences.meat_preference}
+              onChange={(e) => dispatch(setMeatPreference(e.target.value))}
+              data-testid="meat-preference-select"
+              required
+            >
+              {preferences.meatPreferenceOptions.map((option) => (
+                <MenuItem key={option.id} value={option.id}>
+                  {option.preference}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="religious-restrictions-label">Religious Restrictions</InputLabel>
+            <Select
+              labelId="religious-restrictions-label"
+              value={preferences.religious_restrictions}
+              onChange={(e) => dispatch(setReligiousRestrictions(e.target.value))}
+              data-testid="religious-restrictions-select"
+            >
+              {preferences.religiousRestrictionOptions.map((option) => (
+                <MenuItem key={option.id} value={option.id}>
+                  {option.restriction}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <AllergenSelect
+            selectedAllergens={preferences.allergens}
+            setSelectedAllergens={(selected) => dispatch(setAllergens(selected))}
+            allergenOptions={preferences.allergenOptions}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="cuisine-types-label">Cuisine Types</InputLabel>
+            <Select
+              labelId="cuisine-types-label"
+              multiple
+              value={preferences.cuisine_types}
+              onChange={(e) => dispatch(setCuisineTypes(e.target.value))}
+              input={<OutlinedInput label="Cuisine Types" />}
+              renderValue={(selected) => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                  {selected.map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
+                </Box>
+              )}
+              data-testid="cuisine-types-select"
+            >
+              {preferences.cuisineOptions.map((option) => (
+                <MenuItem key={option.id} value={option.type}>
+                  <Checkbox checked={preferences.cuisine_types.indexOf(option.type) > -1} />
+                  <ListItemText primary={option.type} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            label="Max Distance (miles)"
+            type="number"
+            value={preferences.max_distance}
+            onChange={(e) => dispatch(setMaxDistance(e.target.value))}
+            data-testid="max-distance-input"
+            margin="normal"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={preferences.open_now}
+                  onChange={(e) => dispatch(setOpenNow(e.target.checked))}
+                  data-testid="open-now-switch"
+                />
+              }
+              label="Open Now"
             />
-          }
-          label="Open Now"
-        />
-        <FormControlLabel
-          control={
-            <Switch
-              checked={accepts_large_parties}
-              onChange={handleAcceptsLargePartiesChange}
-              data-testid="accepts-large-parties-checkbox"
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={preferences.accepts_large_parties}
+                  onChange={(e) => dispatch(setAcceptsLargeParties(e.target.checked))}
+                  data-testid="accepts-large-parties-switch"
+                />
+              }
+              label="Accepts Large Parties"
             />
-          }
-          label="Accepts Large Parties"
-        />
-      </FormGroup>
+          </FormGroup>
+        </Grid>
+      </Grid>
 
-      <Button type="submit" variant="contained" color="primary" data-testid="save-preferences-button">
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        data-testid="save-preferences-button"
+        sx={{ mt: 2, mr: 1 }}
+      >
         Save Preferences
       </Button>
-      <Button type="button" variant="contained" color="secondary" onClick={handleCancel} data-testid="cancel-button">
+      <Button
+        type="button"
+        variant="contained"
+        color="secondary"
+        onClick={handleCancel}
+        data-testid="cancel-button"
+        sx={{ mt: 2 }}
+      >
         Cancel
       </Button>
+      {error && (
+        <Typography color="error" data-testid="error-message" sx={{ mt: 2 }}>
+          {error}
+        </Typography>
+      )}
+
+      <Dialog
+        open={openCancelDialog}
+        onClose={() => setOpenCancelDialog(false)}
+        aria-labelledby="cancel-dialog-title"
+        aria-describedby="cancel-dialog-description"
+      >
+        <DialogTitle id="cancel-dialog-title">{"Cancel Changes?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="cancel-dialog-description">
+            Are you sure you want to cancel? All unsaved changes will be lost.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenCancelDialog(false)} color="primary">
+            No, Keep Editing
+          </Button>
+          <Button onClick={confirmCancel} color="primary" autoFocus>
+            Yes, Cancel Changes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </form>
   );
 };

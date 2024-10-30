@@ -1,5 +1,6 @@
-const express = require("express");
-const pool = require("../modules/pool");
+import express from 'express';
+import pool from '../modules/pool.js';
+
 const router = express.Router();
 
 /**
@@ -227,4 +228,4 @@ router.put("/:userId", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

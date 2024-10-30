@@ -1,0 +1,579 @@
+
+> supprthyme@2.0.0 test
+> vitest run preferencesForm.test.js
+
+
+ RUN  v2.1.3 /Users/jasonking-lowe/Documents/Gymnarctos Studios/SupprThyme
+
+ ❯ tests/unit/components/PreferencesForm/PreferencesForm.test.jsx  (9 tests | 4 failed) 2693ms
+   × PreferencesForm > allows setting and updating user preferences
+     → Value "4" not found in options
+
+Ignored nodes: comments, script, style
+[36m<div[39m
+  [33mclass[39m=[32m"MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"[39m
+  [33mdata-testid[39m=[32m"max-price-range-select"[39m
+  [33mrequired[39m=[32m""[39m
+[36m>[39m
+  [36m<div[39m
+    [33maria-controls[39m=[32m":rs:"[39m
+    [33maria-expanded[39m=[32m"false"[39m
+    [33maria-haspopup[39m=[32m"listbox"[39m
+    [33maria-labelledby[39m=[32m"max-price-range-label"[39m
+    [33mclass[39m=[32m"MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"[39m
+    [33mrole[39m=[32m"combobox"[39m
+    [33mtabindex[39m=[32m"0"[39m
+  [36m>[39m
+    [36m<span[39m
+      [33mclass[39m=[32m"notranslate"[39m
+    [36m>[39m
+      [0m​[0m
+    [36m</span>[39m
+  [36m</div>[39m
+  [36m<input[39m
+    [33maria-hidden[39m=[32m"true"[39m
+    [33maria-invalid[39m=[32m"false"[39m
+    [33mclass[39m=[32m"MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"[39m
+    [33mrequired[39m=[32m""[39m
+    [33mtabindex[39m=[32m"-1"[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+  [36m<svg[39m
+    [33maria-hidden[39m=[32m"true"[39m
+    [33mclass[39m=[32m"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-lohd6h-MuiSvgIcon-root-MuiSelect-icon"[39m
+    [33mdata-testid[39m=[32m"ArrowDropDownIcon"[39m
+    [33mfocusable[39m=[32m"false"[39m
+    [33mviewBox[39m=[32m"0 0 24 24"[39m
+  [36m>[39m
+    [36m<path[39m
+      [33md[39m=[32m"M7 10l5 5 5-5z"[39m
+    [36m/>[39m
+  [36m</svg>[39m
+  [36m<fieldset[39m
+    [33maria-hidden[39m=[32m"true"[39m
+    [33mclass[39m=[32m"MuiOutlinedInput-notchedOutline css-1ll44ll-MuiOutlinedInput-notchedOutline"[39m
+  [36m>[39m
+    [36m<legend[39m
+      [33mclass[39m=[32m"css-w4cd9x"[39m
+    [36m>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"notranslate"[39m
+      [36m>[39m
+        [0m​[0m
+      [36m</span>[39m
+    [36m</legend>[39m
+  [36m</fieldset>[39m
+[36m</div>[39m
+   × PreferencesForm > handles errors correctly
+     → Error updating preferences
+   × PreferencesForm > shows validation error when required fields are not filled
+     → Unable to find an element by: [data-testid="error-message"]
+
+Ignored nodes: comments, script, style
+[36m<body[39m
+  [33mstyle[39m=[32m""[39m
+[36m>[39m
+  [36m<div>[39m
+    [36m<form[39m
+      [33mdata-testid[39m=[32m"preferences-form"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth css-16mfwdg-MuiFormControl-root"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-19qnlrw-MuiFormLabel-root-MuiInputLabel-root"[39m
+              [33mdata-shrink[39m=[32m"false"[39m
+              [33mid[39m=[32m"max-price-range-label"[39m
+            [36m>[39m
+              [0mMax Price Range *[0m
+            [36m</label>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"[39m
+              [33mdata-testid[39m=[32m"max-price-range-select"[39m
+              [33mrequired[39m=[32m""[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-controls[39m=[32m":r1a:"[39m
+                [33maria-expanded[39m=[32m"false"[39m
+                [33maria-haspopup[39m=[32m"listbox"[39m
+                [33maria-labelledby[39m=[32m"max-price-range-label"[39m
+                [33mclass[39m=[32m"MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"[39m
+                [33mrole[39m=[32m"combobox"[39m
+                [33mtabindex[39m=[32m"0"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"notranslate"[39m
+                [36m>[39m
+                  [0m​[0m
+                [36m</span>[39m
+              [36m</div>[39m
+              [36m<input[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mclass[39m=[32m"MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtabindex[39m=[32m"-1"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-lohd6h-MuiSvgIcon-root-MuiSelect-icon"[39m
+                [33mdata-testid[39m=[32m"ArrowDropDownIcon"[39m
+                [33mfocusable[39m=[32m"false"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M7 10l5 5 5-5z"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+              [36m<fieldset[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"MuiOutlinedInput-notchedOutline css-1ll44ll-MuiOutlinedInput-notchedOutline"[39m
+              [36m>[39m
+                [36m<legend[39m
+                  [33mclass[39m=[32m"css-w4cd9x"[39m
+                [36m>[39m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"notranslate"[39m
+                  [36m>[39m
+                    [0m​[0m
+                  [36m</span>[39m
+                [36m</legend>[39m
+              [36m</fieldset>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth css-16mfwdg-MuiFormControl-root"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-19qnlrw-MuiFormLabel-root-MuiInputLabel-root"[39m
+              [33mdata-shrink[39m=[32m"false"[39m
+              [33mid[39m=[32m"meat-preference-label"[39m
+            [36m>[39m
+              [0mMeat Preference *[0m
+            [36m</label>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"[39m
+              [33mdata-testid[39m=[32m"meat-preference-select"[39m
+              [33mrequired[39m=[32m""[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-controls[39m=[32m":r1b:"[39m
+                [33maria-expanded[39m=[32m"false"[39m
+                [33maria-haspopup[39m=[32m"listbox"[39m
+                [33maria-labelledby[39m=[32m"meat-preference-label"[39m
+                [33mclass[39m=[32m"MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"[39m
+                [33mrole[39m=[32m"combobox"[39m
+                [33mtabindex[39m=[32m"0"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"notranslate"[39m
+                [36m>[39m
+                  [0m​[0m
+                [36m</span>[39m
+              [36m</div>[39m
+              [36m<input[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mclass[39m=[32m"MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtabindex[39m=[32m"-1"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-lohd6h-MuiSvgIcon-root-MuiSelect-icon"[39m
+               ...
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body[39m
+    [33mstyle[39m=[32m""[39m
+  [36m>[39m
+    [36m<div>[39m
+      [36m<form[39m
+        [33mdata-testid[39m=[32m"preferences-form"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth css-16mfwdg-MuiFormControl-root"[39m
+            [36m>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-19qnlrw-MuiFormLabel-root-MuiInputLabel-root"[39m
+                [33mdata-shrink[39m=[32m"false"[39m
+                [33mid[39m=[32m"max-price-range-label"[39m
+              [36m>[39m
+                [0mMax Price Range *[0m
+              [36m</label>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"[39m
+                [33mdata-testid[39m=[32m"max-price-range-select"[39m
+                [33mrequired[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33maria-controls[39m=[32m":r1a:"[39m
+                  [33maria-expanded[39m=[32m"false"[39m
+                  [33maria-haspopup[39m=[32m"listbox"[39m
+                  [33maria-labelledby[39m=[32m"max-price-range-label"[39m
+                  [33mclass[39m=[32m"MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"[39m
+                  [33mrole[39m=[32m"combobox"[39m
+                  [33mtabindex[39m=[32m"0"[39m
+                [36m>[39m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"notranslate"[39m
+                  [36m>[39m
+                    [0m​[0m
+                  [36m</span>[39m
+                [36m</div>[39m
+                [36m<input[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33maria-invalid[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtabindex[39m=[32m"-1"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-lohd6h-MuiSvgIcon-root-MuiSelect-icon"[39m
+                  [33mdata-testid[39m=[32m"ArrowDropDownIcon"[39m
+                  [33mfocusable[39m=[32m"false"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M7 10l5 5 5-5z"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+                [36m<fieldset[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"MuiOutlinedInput-notchedOutline css-1ll44ll-MuiOutlinedInput-notchedOutline"[39m
+                [36m>[39m
+                  [36m<legend[39m
+                    [33mclass[39m=[32m"css-w4cd9x"[39m
+                  [36m>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"notranslate"[39m
+                    [36m>[39m
+                      [0m​[0m
+                    [36m</span>[39m
+                  [36m</legend>[39m
+                [36m</fieldset>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth css-16mfwdg-MuiFormControl-root"[39m
+            [36m>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-19qnlrw-MuiFormLabel-root-MuiInputLabel-root"[39m
+                [33mdata-shrink[39m=[32m"false"[39m
+                [33mid[39m=[32m"meat-preference-label"[39m
+              [36m>[39m
+                [0mMeat Preference *[0m
+              [36m</label>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"[39m
+                [33mdata-testid[39m=[32m"meat-preference-select"[39m
+                [33mrequired[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33maria-controls[39m=[32m":r1b:"[39m
+                  [33maria-expanded[39m=[32m"false"[39m
+                  [33maria-haspopup[39m=[32m"listbox"[39m
+                  [33maria-labelledby[39m=[32m"meat-preference-label"[39m
+                  [33mclass[39m=[32m"MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"[39m
+                  [33mrole[39m=[32m"combobox"[39m
+                  [33mtabindex[39m=[32m"0"[39m
+                [36m>[39m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"notranslate"[39m
+                  [36m>[39m
+                    [0m​[0m
+                  [36m</span>[39m
+                [36m</div>[39m
+                [36m<input[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33maria-invalid[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtabindex[39m=[32m"-1"[39m
+                  [33mvalue[39m=[32m""[39m
+                ...
+   × PreferencesForm > AllergenSelect integration
+     → Unable to find an element with the text: Peanuts. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body[39m
+  [33mstyle[39m=[32m"padding-right: 1024px; overflow: hidden;"[39m
+[36m>[39m
+  [36m<div[39m
+    [33maria-hidden[39m=[32m"true"[39m
+  [36m>[39m
+    [36m<form[39m
+      [33mdata-testid[39m=[32m"preferences-form"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth css-16mfwdg-MuiFormControl-root"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-19qnlrw-MuiFormLabel-root-MuiInputLabel-root"[39m
+              [33mdata-shrink[39m=[32m"false"[39m
+              [33mid[39m=[32m"max-price-range-label"[39m
+            [36m>[39m
+              [0mMax Price Range *[0m
+            [36m</label>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"[39m
+              [33mdata-testid[39m=[32m"max-price-range-select"[39m
+              [33mrequired[39m=[32m""[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-controls[39m=[32m":r1o:"[39m
+                [33maria-expanded[39m=[32m"false"[39m
+                [33maria-haspopup[39m=[32m"listbox"[39m
+                [33maria-labelledby[39m=[32m"max-price-range-label"[39m
+                [33mclass[39m=[32m"MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"[39m
+                [33mrole[39m=[32m"combobox"[39m
+                [33mtabindex[39m=[32m"0"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"notranslate"[39m
+                [36m>[39m
+                  [0m​[0m
+                [36m</span>[39m
+              [36m</div>[39m
+              [36m<input[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mclass[39m=[32m"MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtabindex[39m=[32m"-1"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-lohd6h-MuiSvgIcon-root-MuiSelect-icon"[39m
+                [33mdata-testid[39m=[32m"ArrowDropDownIcon"[39m
+                [33mfocusable[39m=[32m"false"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M7 10l5 5 5-5z"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+              [36m<fieldset[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"MuiOutlinedInput-notchedOutline css-1ll44ll-MuiOutlinedInput-notchedOutline"[39m
+              [36m>[39m
+                [36m<legend[39m
+                  [33mclass[39m=[32m"css-w4cd9x"[39m
+                [36m>[39m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"notranslate"[39m
+                  [36m>[39m
+                    [0m​[0m
+                  [36m</span>[39m
+                [36m</legend>[39m
+              [36m</fieldset>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth css-16mfwdg-MuiFormControl-root"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mclass[39m=[32m"MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-19qnlrw-MuiFormLabel-root-MuiInputLabel-root"[39m
+              [33mdata-shrink[39m=[32m"false"[39m
+              [33mid[39m=[32m"meat-preference-label"[39m
+            [36m>[39m
+              [0mMeat Preference *[0m
+            [36m</label>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"[39m
+              [33mdata-testid[39m=[32m"meat-preference-select"[39m
+              [33mrequired[39m=[32m""[39m
+            [36m>[39m
+              [36m<div[39m
+                [33maria-controls[39m=[32m":r1p:"[39m
+                [33maria-expanded[39m=[32m"false"[39m
+                [33maria-haspopup[39m=[32m"listbox"[39m
+                [33maria-labelledby[39m=[32m"meat-preference-label"[39m
+                [33mclass[39m=[32m"MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"[39m
+                [33mrole[39m=[32m"combobox"[39m
+                [33mtabindex[39m=[32m"0"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"notranslate"[39m
+                [36m>[39m
+                  [0m​[0m
+                [36m</span>[39m
+              [36m</div>[39m
+              [36m<input[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mclass[39m=[32m"MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtabindex[39m=[32m"-1"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSe...
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body[39m
+    [33mstyle[39m=[32m"padding-right: 1024px; overflow: hidden;"[39m
+  [36m>[39m
+    [36m<div[39m
+      [33maria-hidden[39m=[32m"true"[39m
+    [36m>[39m
+      [36m<form[39m
+        [33mdata-testid[39m=[32m"preferences-form"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth css-16mfwdg-MuiFormControl-root"[39m
+            [36m>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-19qnlrw-MuiFormLabel-root-MuiInputLabel-root"[39m
+                [33mdata-shrink[39m=[32m"false"[39m
+                [33mid[39m=[32m"max-price-range-label"[39m
+              [36m>[39m
+                [0mMax Price Range *[0m
+              [36m</label>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"[39m
+                [33mdata-testid[39m=[32m"max-price-range-select"[39m
+                [33mrequired[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33maria-controls[39m=[32m":r1o:"[39m
+                  [33maria-expanded[39m=[32m"false"[39m
+                  [33maria-haspopup[39m=[32m"listbox"[39m
+                  [33maria-labelledby[39m=[32m"max-price-range-label"[39m
+                  [33mclass[39m=[32m"MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"[39m
+                  [33mrole[39m=[32m"combobox"[39m
+                  [33mtabindex[39m=[32m"0"[39m
+                [36m>[39m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"notranslate"[39m
+                  [36m>[39m
+                    [0m​[0m
+                  [36m</span>[39m
+                [36m</div>[39m
+                [36m<input[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33maria-invalid[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtabindex[39m=[32m"-1"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-lohd6h-MuiSvgIcon-root-MuiSelect-icon"[39m
+                  [33mdata-testid[39m=[32m"ArrowDropDownIcon"[39m
+                  [33mfocusable[39m=[32m"false"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M7 10l5 5 5-5z"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+                [36m<fieldset[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"MuiOutlinedInput-notchedOutline css-1ll44ll-MuiOutlinedInput-notchedOutline"[39m
+                [36m>[39m
+                  [36m<legend[39m
+                    [33mclass[39m=[32m"css-w4cd9x"[39m
+                  [36m>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"notranslate"[39m
+                    [36m>[39m
+                      [0m​[0m
+                    [36m</span>[39m
+                  [36m</legend>[39m
+                [36m</fieldset>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth css-16mfwdg-MuiFormControl-root"[39m
+            [36m>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-19qnlrw-MuiFormLabel-root-MuiInputLabel-root"[39m
+                [33mdata-shrink[39m=[32m"false"[39m
+                [33mid[39m=[32m"meat-preference-label"[39m
+              [36m>[39m
+                [0mMeat Preference *[0m
+              [36m</label>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"[39m
+                [33mdata-testid[39m=[32m"meat-preference-select"[39m
+                [33mrequired[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33maria-controls[39m=[32m":r1p:"[39m
+                  [33maria-expanded[39m=[32m"false"[39m
+                  [33maria-haspopup[39m=[32m"listbox"[39m
+                  [33maria-labelledby[39m=[32m"meat-preference-label"[39m
+                  [33mclass[39m=[32m"MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"[39m
+                  [33mrole[39m=[32m"combobox"[39m
+                  [33mtabindex[39m=[32m"0"[39m
+                [36m>[39m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"notranslate"[39m
+                  [36m>[39m
+                    [0m​[0m
+                  [36m</span>[39m
+                [36m</div>[39m
+                [36m<input[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33maria-invalid[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"[39m
+                  [33mrequired[39m=[32m""[39m
+               ...
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 5 passed (9)
+   Start at  18:55:15
+   Duration  5.21s (transform 240ms, setup 375ms, collect 1.30s, tests 2.69s, environment 437ms, prepare 88ms)
+

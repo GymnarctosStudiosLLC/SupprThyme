@@ -4,18 +4,17 @@ import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { vi, describe, beforeEach, test, expect } from 'vitest';
-import axios from 'axios';
 import PreferencesForm from '../../../../src/components/PreferencesForm/PreferencesForm';
+import preferencesReducer from '../../../../src/redux/reducers/preferencesReducer';
+import * as PreferencesFormActions from '../../../../src/redux/actions/PreferencesForm.actions';
 
-// Mock axios
-vi.mock('axios');
+vi.mock('../../../../src/redux/actions/PreferencesForm.actions');
 
-// Create a mock store
 const createMockStore = (initialState) => {
   return configureStore({
     reducer: {
       user: (state = initialState.user) => state,
-      preferences: (state = initialState.preferences) => state,
+      preferences: preferencesReducer,
     },
     preloadedState: initialState,
   });
@@ -36,47 +35,41 @@ describe('PreferencesForm', () => {
         max_distance: '',
         open_now: true,
         accepts_large_parties: true,
+        priceRangeOptions: [
+          { id: '1', range: '$' },
+          { id: '2', range: '$$' },
+          { id: '3', range: '$$$' },
+          { id: '4', range: '$$$$' },
+        ],
+        meatPreferenceOptions: [
+          { id: '1', preference: 'Vegetarian' },
+          { id: '2', preference: 'Vegan' },
+          { id: '3', preference: 'Non-vegetarian' },
+        ],
+        religiousRestrictionOptions: [
+          { id: '1', restriction: 'Kosher' },
+          { id: '2', restriction: 'Halal' },
+          { id: '3', restriction: 'None' },
+        ],
+        allergenOptions: [
+          { id: '1', allergen: 'Peanuts' },
+          { id: '2', allergen: 'Shellfish' },
+        ],
+        cuisineOptions: [
+          { id: '1', type: 'Italian' },
+          { id: '2', type: 'Chinese' },
+        ],
       },
     });
 
-    vi.mocked(axios.get).mockImplementation((url) => {
-      switch (url) {
-        case '/api/form_data/price-ranges':
-          return Promise.resolve({ data: [
-            { id: 1, range: '$' },
-            { id: 2, range: '$$' },
-            { id: 3, range: '$$$' },
-            { id: 4, range: '$$$$' }
-          ]});
-        case '/api/form_data/meat-preferences':
-          return Promise.resolve({ data: [
-            { id: 1, preference: 'Vegetarian' },
-            { id: 2, preference: 'Vegan' },
-            { id: 3, preference: 'Non-vegetarian' }
-          ]});
-        case '/api/form_data/religious-options':
-          return Promise.resolve({ data: [
-            { id: 1, restriction: 'Kosher' },
-            { id: 2, restriction: 'Halal' },
-            { id: 3, restriction: 'None' }
-          ]});
-        case '/api/form_data/allergen-options':
-          return Promise.resolve({ data: [
-            { id: 1, allergen: 'Peanuts' },
-            { id: 2, allergen: 'Dairy' }
-          ]});
-        case '/api/form_data/cuisine-options':
-          return Promise.resolve({ data: [
-            { id: 1, type: 'Italian' },
-            { id: 2, type: 'Chinese' }
-          ]});
-        default:
-          return Promise.reject(new Error('Not found'));
-      }
-    });
+    vi.mocked(PreferencesFormActions.fetchPriceRanges).mockResolvedValue(undefined);
+    vi.mocked(PreferencesFormActions.fetchMeatPreferences).mockResolvedValue(undefined);
+    vi.mocked(PreferencesFormActions.fetchReligiousRestrictions).mockResolvedValue(undefined);
+    vi.mocked(PreferencesFormActions.fetchAllergenOptions).mockResolvedValue(undefined);
+    vi.mocked(PreferencesFormActions.fetchCuisineOptions).mockResolvedValue(undefined);
   });
 
-  test('renders form fields', async () => {
+  test('renders form fields correctly', async () => {
     render(
       <Provider store={store}>
         <PreferencesForm />
@@ -84,65 +77,13 @@ describe('PreferencesForm', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByLabelText(/Max Price Range/i)).toBeDefined();
-      expect(screen.getByLabelText(/Meat Preference/i)).toBeDefined();
-      expect(screen.getByLabelText(/Religious Restrictions/i)).toBeDefined();
-      expect(screen.getByLabelText(/Cuisine Types/i)).toBeDefined();
-      expect(screen.getByLabelText(/Max Distance/i)).toBeDefined();
-      expect(screen.getByLabelText(/Open Now/i)).toBeDefined();
-      expect(screen.getByLabelText(/Accepts Large Parties/i)).toBeDefined();
-    });
-  });
-
-  test('renders price range options correctly', async () => {
-    render(
-      <Provider store={store}>
-        <PreferencesForm />
-      </Provider>
-    );
-
-    const select = await screen.findByLabelText(/Max Price Range/i);
-    await userEvent.click(select);
-
-    await waitFor(() => {
-      expect(screen.getByText('$')).toBeDefined();
-      expect(screen.getByText('$$')).toBeDefined();
-      expect(screen.getByText('$$$')).toBeDefined();
-      expect(screen.getByText('$$$$')).toBeDefined();
-    });
-  });
-
-  test('renders meat preference options correctly', async () => {
-    render(
-      <Provider store={store}>
-        <PreferencesForm />
-      </Provider>
-    );
-
-    const select = await screen.findByLabelText(/Meat Preference/i);
-    await userEvent.click(select);
-
-    await waitFor(() => {
-      expect(screen.getByText('Vegetarian')).toBeDefined();
-      expect(screen.getByText('Vegan')).toBeDefined();
-      expect(screen.getByText('Non-vegetarian')).toBeDefined();
-    });
-  });
-
-  test('renders religious restrictions options correctly', async () => {
-    render(
-      <Provider store={store}>
-        <PreferencesForm />
-      </Provider>
-    );
-
-    const select = await screen.findByLabelText(/Religious Restrictions/i);
-    await userEvent.click(select);
-
-    await waitFor(() => {
-      expect(screen.getByText('Kosher')).toBeDefined();
-      expect(screen.getByText('Halal')).toBeDefined();
-      expect(screen.getByText('None')).toBeDefined();
+      expect(screen.getByLabelText(/Max Price Range/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/Meat Preference/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/Religious Restrictions/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/Cuisine Types/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/Max Distance/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/Open Now/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/Accepts Large Parties/i)).toBeInTheDocument();
     });
   });
 
@@ -153,45 +94,33 @@ describe('PreferencesForm', () => {
       </Provider>
     );
 
-    // Open dropdowns and select options
-    const priceRangeSelect = await screen.findByLabelText(/Max Price Range/i);
-    await userEvent.click(priceRangeSelect);
-    await userEvent.click(screen.getByText('$$$$'));
-
-    const meatPreferenceSelect = await screen.findByLabelText(/Meat Preference/i);
-    await userEvent.click(meatPreferenceSelect);
-    await userEvent.click(screen.getByText('Vegetarian'));
-
-    const religiousRestrictionsSelect = await screen.findByLabelText(/Religious Restrictions/i);
-    await userEvent.click(religiousRestrictionsSelect);
-    await userEvent.click(screen.getByText('None'));
-    
-    // Type max distance
-    await userEvent.type(screen.getByLabelText(/Max Distance/i), '10');
-
-    // Toggle switches
-    await userEvent.click(screen.getByLabelText(/Open Now/i));
-    await userEvent.click(screen.getByLabelText(/Accepts Large Parties/i));
-
-    // Submit form
-    await userEvent.click(screen.getByRole('button', { name: /Save Preferences/i }));
-
-    // Check if the correct action was dispatched
     await waitFor(() => {
-      const state = store.getState();
-      expect(state.preferences).toEqual(expect.objectContaining({
-        max_price_range: 4,
-        meat_preference: 1,
-        religious_restrictions: 3,
+      expect(screen.getByTestId('max-price-range-select')).toBeInTheDocument();
+    });
+
+    await userEvent.selectOptions(screen.getByTestId('max-price-range-select'), '4');
+    await userEvent.selectOptions(screen.getByTestId('meat-preference-select'), '1');
+    await userEvent.selectOptions(screen.getByTestId('religious-restrictions-select'), '3');
+    await userEvent.type(screen.getByTestId('max-distance-input'), '10');
+    await userEvent.click(screen.getByTestId('open-now-switch'));
+    await userEvent.click(screen.getByTestId('accepts-large-parties-switch'));
+
+    await userEvent.click(screen.getByTestId('save-preferences-button'));
+
+    expect(PreferencesFormActions.updatePreferences).toHaveBeenCalledWith(
+      expect.objectContaining({
+        max_price_range: '4',
+        meat_preference: '1',
+        religious_restrictions: '3',
         max_distance: '10',
         open_now: false,
         accepts_large_parties: false,
-      }));
-    });
+      })
+    );
   });
 
-  test('displays error message on API failure', async () => {
-    vi.mocked(axios.get).mockRejectedValueOnce(new Error('API Error'));
+  test('handles errors correctly', async () => {
+    vi.mocked(PreferencesFormActions.updatePreferences).mockRejectedValue(new Error('Error updating preferences'));
 
     render(
       <Provider store={store}>
@@ -200,7 +129,79 @@ describe('PreferencesForm', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/Error fetching options/i)).toBeDefined();
+      expect(screen.getByTestId('max-price-range-select')).toBeInTheDocument();
+    });
+
+    await userEvent.selectOptions(screen.getByTestId('max-price-range-select'), '4');
+    await userEvent.selectOptions(screen.getByTestId('meat-preference-select'), '1');
+    await userEvent.click(screen.getByTestId('save-preferences-button'));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('error-message')).toHaveTextContent('Failed to update preferences. Please try again later.');
+    });
+  });
+
+  test('shows validation error when required fields are not filled', async () => {
+    render(
+      <Provider store={store}>
+        <PreferencesForm />
+      </Provider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('save-preferences-button')).toBeInTheDocument();
+    });
+
+    await userEvent.click(screen.getByTestId('save-preferences-button'));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('error-message')).toHaveTextContent('Please fill in all required fields.');
+    });
+  });
+
+  test('cancel button opens confirmation dialog', async () => {
+    render(
+      <Provider store={store}>
+        <PreferencesForm />
+      </Provider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('cancel-button')).toBeInTheDocument();
+    });
+
+    await userEvent.click(screen.getByTestId('cancel-button'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Cancel Changes?')).toBeInTheDocument();
+      expect(screen.getByText('Are you sure you want to cancel? All unsaved changes will be lost.')).toBeInTheDocument();
+    });
+  });
+
+  test('AllergenSelect integration', async () => {
+    const setAllergensMock = vi.fn();
+    vi.mocked(PreferencesFormActions.setAllergens).mockImplementation(setAllergensMock);
+
+    render(
+      <Provider store={store}>
+        <PreferencesForm />
+      </Provider>
+    );
+
+    // Wait for the component to render
+    await waitFor(() => {
+      expect(screen.getByTestId('preferences-form')).toBeInTheDocument();
+    });
+
+    // Simulate allergen selection
+    const allergenSelect = screen.getByLabelText(/Allergens/i);
+    expect(allergenSelect).toBeInTheDocument();
+
+    await userEvent.type(allergenSelect, 'Peanuts');
+    await userEvent.keyboard('{Enter}');
+
+    await waitFor(() => {
+      expect(setAllergensMock).toHaveBeenCalled();
     });
   });
 });

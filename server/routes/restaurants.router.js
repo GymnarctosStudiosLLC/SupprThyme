@@ -1,9 +1,10 @@
-const express = require("express");
-const pool = require("../modules/pool");
-const { build } = require("vite");
+import express from 'express';
+import pool from '../modules/pool.js';
+import { build } from 'vite';
+import GeocodingError from '../constants/GeocodingError.js';
+import { normalizeLocation } from '../modules/Geolocation.js';
+
 const router = express.Router();
-const GeocodingError = require("../constants/GeocodingError.js");
-const normalizeLocation = require("../modules/Geolocation.js");
 
 async function buildWhereClause(preferences, userLocationString) {
   console.log("buildWhereClause input: ", {
@@ -86,7 +87,6 @@ router.get("/", async (req, res) => {
   }
   try {
     //normalize the address
-
     const normalizedAddress = await normalizeLocation(city, state);
     const query = `
     SELECT DISTINCT id, name, rating, price_level, location_string, address, latitude, longitude
@@ -118,7 +118,7 @@ router.get("/search", async (req, res) => {
       return res.sendStatus(400).json({ error: "City and state must be provided" });
     }
 
-    const normalizedAddress = await normalizeLocation( city, state);
+    const normalizedAddress = await normalizeLocation(city, state);
     userLocationString = `${normalizedAddress.city}, ${normalizedAddress.state}`;
     const limit = req.query.limit || 5; // Default limit is 5, or use the provided query param
     console.log("aggregate preferences: ", aggregatePreferences);
@@ -248,4 +248,4 @@ router.post("/", (req, res) => {
   // POST route code here
 });
 
-module.exports = router;
+export default router;

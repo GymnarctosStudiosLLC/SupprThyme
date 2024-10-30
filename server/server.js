@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import sessionMiddleware from './modules/session-middleware.js';
-import passport from './strategies/user.strategy.js';
+import { passport } from './strategies/user.strategy.js';
 import userRouter from './routes/user.router.js';
 import testingRouter from './routes/testing.router.js';
 import formRouter from './routes/preferences_form.router.js';

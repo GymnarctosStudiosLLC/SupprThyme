@@ -1,5 +1,6 @@
-const { Loader } = require('@googlemaps/js-api-loader');
-const GeocodingError = require('../constants/GeocodingError.js');
+import pkg from '@googlemaps/js-api-loader';
+const { Loader } = pkg;
+import GeocodingError from '../constants/GeocodingError.js';
 
 const loader = new Loader({
   apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -50,4 +51,4 @@ async function normalizeLocation(city, state) {
   }
 }
 
-module.exports = normalizeLocation;
+export { normalizeLocation };
