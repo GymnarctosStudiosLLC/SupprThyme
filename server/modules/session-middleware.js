@@ -1,9 +1,11 @@
 // No changes should be required in this file
 
-const expressSession = require('express-session');
-const PgSession = require('connect-pg-simple')(expressSession);
-const pool = require('./pool.js');
-const warnings = require('../constants/warnings');
+import expressSession from 'express-session';
+import pgSession from 'connect-pg-simple';
+import pool from './pool.js';
+import { badSecret, exampleBadSecret } from '../constants/warnings.js';
+
+const PgSession = pgSession(expressSession);
 
 /*
   The session makes it so a user can enters their username and password one time,
@@ -19,10 +21,10 @@ const serverSessionSecret = () => {
   if (
     !process.env.SERVER_SESSION_SECRET ||
     process.env.SERVER_SESSION_SECRET.length < 8 ||
-    process.env.SERVER_SESSION_SECRET === warnings.exampleBadSecret
+    process.env.SERVER_SESSION_SECRET === exampleBadSecret
   ) {
     // Warning if user doesn't have a good secret
-    console.log(warnings.badSecret);
+    console.log(badSecret);
   }
 
   return process.env.SERVER_SESSION_SECRET;
@@ -32,7 +34,8 @@ let pruneSessionInterval = 60;
 if (process.env.NODE_ENV === 'test') {
     pruneSessionInterval = false;
 }
-module.exports = expressSession({
+
+const sessionMiddleware = expressSession({
     store: new PgSession({
         pool,
         pruneSessionInterval,
@@ -49,3 +52,5 @@ module.exports = expressSession({
       secure: false // can only be set to true if the app uses https
     },
 });
+
+export default sessionMiddleware;
