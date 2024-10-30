@@ -1,10 +1,10 @@
 import express from 'express';
 import { rejectUnauthenticated } from '../modules/authentication-middleware.js';
-import encryptLib from '../modules/encryption.js';
+import { encryptPassword, comparePassword } from '../modules/encryption.js';
 import pool from '../modules/pool.js';
-import userStrategy from '../strategies/user.strategy.js';
+import { passport as userStrategy } from '../strategies/user.strategy.js';
 import GeocodingError from '../constants/GeocodingError.js';
-import normalizeLocation from '../modules/Geolocation.js';
+import { normalizeLocation } from '../modules/Geolocation.js';
 
 const router = express.Router();
 
@@ -118,7 +118,7 @@ router.post('/register', async (req, res) => {
       VALUES ($1, $2, $3)
       RETURNING id
     `,
-      [username, encryptLib.encryptPassword(password), email]
+      [username, encryptPassword(password), email]
     );
 
     const userId = userResult.rows[0].id;

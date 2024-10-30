@@ -1,5 +1,6 @@
-const express = require("express");
-const pool = require("../modules/pool");
+import express from 'express';
+import pool from '../modules/pool.js';
+
 const router = express.Router();
 
 /**
@@ -8,11 +9,10 @@ const router = express.Router();
 router.get("/", (req, res) => {
   // GET route code here
 });
+
 //Price Ranges
 router.get("/price-ranges", (req, res) => {
-  sqlText = `
-    SELECT * FROM "price_ranges"
-    `;
+  const sqlText = 'SELECT * FROM "price_ranges"';
   pool
     .query(sqlText)
     .then((result) => {
@@ -26,9 +26,7 @@ router.get("/price-ranges", (req, res) => {
 
 //Meat Preference
 router.get("/meat-preferences", (req, res) => {
-  sqlText = `
-    SELECT * FROM "meat_preferences"
-    `;
+  const sqlText = 'SELECT * FROM "meat_preferences"';
   pool
     .query(sqlText)
     .then((result) => {
@@ -42,9 +40,7 @@ router.get("/meat-preferences", (req, res) => {
 
 //religious restriction options
 router.get("/religious-options", (req, res) => {
-  sqlText = `
-    SELECT * FROM "religious_restrictions"
-    `;
+  const sqlText = 'SELECT * FROM "religious_restrictions"';
   pool
     .query(sqlText)
     .then((result) => {
@@ -58,9 +54,7 @@ router.get("/religious-options", (req, res) => {
 
 //allergen options
 router.get("/allergen-options", (req, res) => {
-  sqlText = `
-    SELECT * FROM "allergens"
-    `;
+  const sqlText = 'SELECT * FROM "allergens"';
   pool
     .query(sqlText)
     .then((result) => {
@@ -74,9 +68,7 @@ router.get("/allergen-options", (req, res) => {
 
 //cuisine options
 router.get("/cuisine-options", (req, res) => {
-  sqlText = `
-    SELECT * FROM "cuisine_types"
-    `;
+  const sqlText = 'SELECT * FROM "cuisine_types"';
   pool
     .query(sqlText)
     .then((result) => {
@@ -143,4 +135,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
